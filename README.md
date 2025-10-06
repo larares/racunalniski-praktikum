@@ -1,1 +1,2 @@
-# racunalniski-praktikum
+# Računalniški praktikum
+bližnjice (DN): 
