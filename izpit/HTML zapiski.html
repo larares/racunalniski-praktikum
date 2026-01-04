@@ -1,1 +1,103 @@
 <!DOCTYPE html>
+
+<!-- atributi so imenovani značka, zapisani morajo biti v kljunčkih in končani z / za prvim kljunčkom
+nujno morajo biti se naslednje značke: -->
+
+<html lang="en">
+    <!--sl je koda za slovenski jezik, en pa za angleščino-->
+    <head>
+        <title>(karkoli zelis da je naslov)</title>
+        <!-- v glavo dokumenta dodaš tudi značko ki določa kodiranje dokumenta (in je ni treba zaključiti, uporablja se, da se ti +- lepo izpiše):-->
+         <meta charset="UTF-8">
+    </head>
+    <body>
+        (tekst ki ga pises za spletno stran, znotraj imas lahko se naslove,...), zaključiš ga ponavadi šele na koncu, zraven zaključka html
+
+
+<!-- hierarhija, ki vlada:
+     html:
+     - head 
+        - title
+     - body
+        - h1 (malo manjši naslov je h2, še manjši h3,...)
+        -p (paragraph??)
+            -a   -->
+
+
+<!-- ukaz wrap označeno besedilo obda s HTML značko, naredi toliko značk, kot imamo kurzorjev, za vsakega eno
+ ukaz uppercase črke označenega besedila spremeni v velike začetnice
+ ukaz select all occ pa se uporablja podobno kot find and replace - ukaz uredi kurzor za vsako pojavitvijo iskalnega ali izbranega niza-->
+
+
+<!-- da postaviš kurzor na začetek in konec vsake vrstice (da dodaš značko): ctrl + alt + (puščica gor ali dol) in še držiš tipko shift in še end za skok na konec vrstice-->
+
+
+<!-- naštevanje vsebine: celotna vsebina mora biti obdana z značko: <ol> in </ol> (za urejen seznam, ki je oštevilčen, za neoštevilčenega pa ul)
+ vsaka alineja je pa obdana z značko <li> </li> zdaj lahko uporabimo ukaz wrap, za li, in nato še celotno vsebino izberemo z enim kurzorjem in z ukazom wrap pbdamo še z ol-->
+
+
+<!-- citate označujemo z značko blockquote-->
+
+
+<!-- za link, ki se ti prikaže daš: <a href="(link kamor hočeš da gre zadeva če nanj klikneš)">(vsebina, ime za katerim se link skriva)</a> -->
+
+
+<!-- tabela:
+     <table>
+    <tr><th>Pot</th>   <th>Volume</th>   <th>Weight</th></tr>
+    <tr><th>large</th>   <td>310 ml (±8 ml)</td>    <td>200 g (±10 g)</td></tr>
+    <tr><th>small</th>   <td>350 ml (±4 ml)</td>    <td>118 g (±10 g)</td></tr>
+    </table>
+ tr - vrstica
+ td - celice v vsaki vrstici
+ th - celice za glavo tabele-->
+
+
+<!-- vstavljanje slike:
+ uporabiš značko img, ki je ni treba zaključiti
+ src - atribut, s katerim podamo pot do slike
+ alt - opis slike 
+ img src="https://racunalniski-praktikum.github.io/_downloads/ce965057ec4200b1dde86c87a12f0ef2/tea-bowl.jpg" alt="to je slika skodelice"> -->
+
+ 
+<!-- besedilo lahko označimo z različnimi značkami:
+ - strong - poudarjeno
+ - em - ležeče
+ - b - bold
+ - i - italic-->
+
+
+<!-- SKLICEVANJE ZNOTRAJ DOKUMENTA
+ uporabimo značke:
+    - a
+    - id - kam želimo, da povezava kaže
+ torej bo izgledalo takole: 
+ - <h2 id="criticism">Criticism</h2> (nalepimo tja, kjer želimo, da kliknemo, da pridemo v tem primeru do podnaslova Criticism)
+ - <a href="#criticism">Criticism</a> (prilepimo tja, kamor želimo, da nas vrže, ko kliknemo na zgornjo povezavo - torej v tem primeru izbrišemo tudi naslov)  -->
+
+
+ </body>
+ </html> <!-- nujno na koncu!! vsako značko posebej zaključuješ!!-->
+<!-- da iščeš hrošče, si odpreš 'problems' - spodaj levo ikona s križcem, pove ti v kateri vrstici je težava, ki jo moraš odpraviti-->
+
+Naštete značke v HTML pridejo v poštev za izpit brez dodatnih razlag, na primer "določite naslov dokumenta na … in alineje, označene z - pretvorite v neurejen seznam":
+
+•	glava dokumenta: <!DOCTYPE>, <html>, <head>, <title>, <link>, <meta>,
+
+•	struktura dokumenta: <!--...-->, <body>, <div>, <h1>, <h2>, ... <h6>,
+
+•	oblikovanje vsebine: <a>, <blockquote>, <br>, <code>, <em>, <hr>, <img>, <kbd>, <p>, <pre>, <small>, <span>, <strong>,
+
+•	seznami: <dl>, <dt>, <dd>, <ol>, <ul>, <li>,
+
+•	tabele: <table>, <tbody>, <td>, <tfoot>, <th>, <thead>, <tr>,
+
+•	splošni atributi: id za identifikator, class za razred,
+
+•	nalaganje CSS stila: <link rel="stylesheet" href="⟨pot-do-datoteke⟩">,
+
+•	kodiranje dokumenta: <meta charset="UTF-8">,
+
+•	povezave: <a href="⟨naslov⟩">⟨besedilo povezave⟩</a> in <a href="#⟨id-elementa⟩">⟨besedilo povezave⟩</a>.
+
+Navodila lahko omenjajo tudi druge elemente, na primer "s pomočjo značke marquee naslov pretvorite v pomično besedilo". Pričakuje se, da boste znali sami poiskati dokumentacijo in ustrezno uporabiti omenjen element.
