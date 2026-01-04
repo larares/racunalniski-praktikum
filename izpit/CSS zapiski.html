@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+osnovno:
+-	ne pozabi pisati ; na koncu VSAKIH deklaracij
+-	deklaracije določamo npr tako: h1 { font size: …..px; color:…..;}
+-	v tem primeru je h1 značka
+-	[atribut] izbere vse značke v dokumentu, ki imajo atribut atribut
+-	[atribut=vrednost] izbere vse značke v dokumentu, ki imajo atrribut atribut z vrednostjo vrednost
+-	.razred izbere vse značke v dokumentu, ki imajo atribut class z vrednostjo razred
+-	#(id-elementa) izbere tisto značko v dokumentu, ki ima atribut id z vrednostjo id-elementa
+-	* je univerzalni izbiralec in izbere vse značke v dokumentu
+-	potomce izbiramo s presledki
+-	z vejico združimo več izbiralcev v enega
+
+
+škatlast model:
+-	zunanji rob je prazen prostor = margin (prazen prostor na zunanji strani roba) -> prostor nad zgornjim robom = margin-top
+-	notranji rob je notranji prazen prostor = padding (prazen prostor med robom elementa in vsebino)
+-	obroba oz rob = border (rob, določimo lahko širino, stil, barvo)
+-	višina = height
+-	širina = width
+
+
+merske enote:
+-	piksel - px
+-	em - 2em = 200%
+
+
+dodajanje pravil:
+-	na spletu poiščeš datoteko normalize.css in jo prekopiraš v imenik, kjer imaš shranjen css dokument
+-	css vključimo v html: <link rel="stylesheet" href="ime_datoteke.css">
+-	na vajah smo vključili normalize.css in oblikovanje.css
+
+
+oblikovanje dokumenta:
+-	v datoteki oblikovanje smo dodali deklaracijo za naslove h1 (napisana zgoraj)
+
+-	body {
+	    /*  Barva pisave pod značko oz. oznako  */
+	    color: #333333; 
+	    /*  Določanje pisave: brskalnik uporabi prvo v seznamu pisav, ki jo ima uporabnik nameščeno.
+	       Če ni nameščena nobena od naštetih pisav, se uporabi privzeta pisava brskalnika. */
+	    font-family: Garamond, "Hoefler Text", "Times New Roman", Times, serif;
+	    /*  Velikost pisave lahko določimo na več načinov.
+	        Spodnji jo določi glede na velikost pisave v znački, ki je na enem nivoju višje;
+	        če velikost pisave na zgornjem nivoju ni določena, se določi glede na privzeto velikost pisave v brskalniku. */
+	    font-size: 1.2em;
+	    /*  Višina vrstice  */
+	    line-height: 1.5;
+	    /*  Največja širina vsebine spletne strani  */
+	    max-width: 40em;
+	    /*  Širina zunanjega roba; auto pomeni, da rob izračuna brskalnik tako, da element zavzame širino določeno v slogu,
+	        preostanek pa se enakomerno razdeli med levim in desnim robom  */
+	    margin: auto;
+	    /*  Obojestranska poravnava besedila    */
+	    text-align: justify;
+	    } bilo v datoteki oblikovanje
+
+-	“znački section dodajte atribut id z imenom, na katerega se boste sklicevali, npr uvod” = <section id="uvod"> na koncu vedno zaključiš </section>
+
+-	ko se sklicuješ nazaj po tej znački: #uvod { dodaš karkol rabiš dodat, ne pozabi vmes pisati ;}
+
+-	div – uporablja za združevanje elementov, mi smo dodali atribut class z vrednostjo slika <div class="slika">
+
+-	v oblikovanje.css smo nato dodali atribute za .slika {…}
+
+-	da poravnaš besedilo obojestransko: text-align: left;
+
+-	če dva izbiralca ločimo s presledkom, npr. .slika img določamo vrednosti za vse elemente, ki jih ujame drugi element, ki so gnezdeni v elementih, ki jih uhame prvi izbiralec. torej vse značke img, ki se nahajajo v elementu z atributom clas=”slika”
+
+-	če želimo, da se besedilo oblike okrog slik, dodamo deklaracijo float: right;
+
+
+
+Našteti izbiralci pridejo v poštev brez dodatnih razlag, na primer "Vsem povezavam v tabeli dodajte ozadje barve #bada55":
+•	za značke ⟨znacka⟩,
+•	za razrede .⟨razred⟩,
+•	po identifikatorju #⟨id-elementa⟩,
+•	univerzalni izbiralec *,
+•	izbiranje potomcev ⟨izbiralec-starsa⟩ ⟨izbiralec-otroka⟩,
+•	disjunkcija ⟨prvi-izbiralec⟩, ⟨ali-drugi-izbiralec⟩,
+•	konjunkcija ⟨prvi-izbiralec⟩⟨in-drugi-izbiralec⟩.
+Del navodil bo od vas zahteval, da v datoteki prepoznate izbiralec in pripadajoč sklop deklaracij, na primer "Sklop deklaracij za sode vrstice dopolnite z deklaracijo za barvo ozadja, ki naj bo rgb(225, 127, 74, 0.15)." Za to v poštev pridejo še naslednji izbiralci:
+•	[⟨atribut⟩], ki izbere vse značke v dokumentu z atributom atribut,
+•	[⟨atribut⟩=⟨vrednost⟩], ki izbere vse značke v dokumentu z atributom atribut, nastavljenim na vrednost,
+•	psevdo-razredi z opisnim imenom, kot npr. :nth-child(even), :nth-child(odd), :hover, :last-child, …
+Poleg naštetih lastnosti, ki pridejo v poštev brez dodatnih razlag, lahko navodila omenjajo tudi lastnosti, ki jih ne poznate, na primer "Z lastnostjo opacity nastavite prosojnost tabele na 90%":
+•	dimenzije elementov: height, width,
+•	škatlasti model: margin, border, padding, vključno z verzijami -top, -right, -bottom, -left,
+•	robovi: border: ⟨debelina⟩ ⟨slog⟩ ⟨barva⟩ ali border-⟨top|right|bottom|left⟩: ⟨debelina⟩ ⟨slog⟩ ⟨barva⟩ (če sloga navodila ne poimenujejo eksplicitno, uporabite solid),
+•	besedilo: text-align, font-size, font-weight, color,
+•	oblivanje: float,
+•	barva ozadja: background-color,
+•	barve: po imenu (red), v heksadecimalnem zapisu (#FF0000) ali v zapisu RGB (rgb(225, 0, 0) oz. s prosojnostjo rgba(225, 0, 0, 0.4)),
+•	dimenzije: v točkah (10px), enotah em (2em) ali odstotkih (42%).
