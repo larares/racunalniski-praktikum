@@ -1,0 +1,67 @@
+% alt + Z = da imaš vse na istem zaslonu in ne rabiš scrollat do konca vrstice
+
+\documentclass{article} 
+% documentclass ima v [] nastavitve in v {} tip dokumenta (v [] smo dali kot primer a4paper in velikost pisave - npr [a4paper, 10pt])
+
+% pogosti tipi dokumentov:
+%   article - članek
+%   amsart - članki za revije American Mathematical Society
+%   beamer - prosojnice za predavanje
+%   book - knjiga
+%   letter - pismo
+
+% PREAMBULA = ne pišemo nastavitev ampak samo ukaze in nastavitve, ki jih določamo s pomočjo različnih paketov; \usepackage[dodatne nastavitve]{ime paketa} 
+
+\usepackage[utf8]{inputenc} 
+% vhodna datoteka je kodirana v sistemu UTF-8
+
+\usepackage[T1]{fontenc}      
+% izhodna datoteka je kodirana v sistemu T1
+
+
+% PAKETI ZA SLOVENŠČINO:
+\usepackage[slovene]{babel} 
+% za uporabljanje slovenščine in izpisovanje šumnikov
+\usepackage{lmodern}
+% to je dodaten, načeloma neobvezen paket, ki olepša slovensko pisavo 
+% Ostale pogoste izbire pisav:
+% \usepackage{times}            % Times New Roman
+% \usepackage{palatino}         % Palatino
+% \usepackage{concrete}         % Pisava, ki jo je uporabil Donald Knuth v knjigi "Concrete mathematics"
+
+
+% OSTALI PAKETI:
+\usepackage{hyperref}
+% paket za povezave znotraj dokumenta in hiper - povezave
+
+
+% KONEC PREAMBULE
+
+% VSEBINA DOKUMENTA - se vedno začne z:
+\begin{document}
+% in kasneje konča z \end{document}
+
+% NASLOV IN AVTOR
+
+\title{Zapiski za {\LaTeX}}
+% naslov
+
+\author{Lara Reš}
+% in avtor
+
+\date{}
+% lahko nastavimo še datum, ki ga zapišemo v zavite oklepaje, če pa želimo, da se datum ne izpiše, potem pustimo prazno znotraj oklepajev
+
+\maketitle 
+% je ukaz, s katerim dejansko naredimo naslov
+
+
+% OKOLJA
+\begin{abstract}
+    To je okolje za povzetek, napišemo kratek opis vsebine članka
+\end{abstract}
+
+
+% Članek lahko hierarhično razdelimo na razdelke (\section), podrazdelke (\subsection), podpodrazdelke (\subsubsection) in podpodpodrazdelke (\paragraph). V večini primerov potrebujemo samo razdelke in podarazdelke.
+
+\end{document}
