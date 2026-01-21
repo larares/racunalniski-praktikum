@@ -1,8 +1,8 @@
-% alt + Z = da imaš vse na istem zaslonu in ne rabiš scrollat do konca vrstice
-
 \documentclass{article} 
-% documentclass ima v [] nastavitve in v {} tip dokumenta (v [] smo dali kot primer a4paper in velikost pisave - npr [a4paper, 10pt])
 
+% documentclass ima v [] nastavitve in v {} tip dokumenta (v [] smo dali kot primer a4paper in velikost pisave - npr [a4paper, 10pt]) -> \documentclass[a4paper]{article}
+
+%alt+z
 % pogosti tipi dokumentov:
 %   article - članek
 %   amsart - članki za revije American Mathematical Society
@@ -33,15 +33,69 @@
 % OSTALI PAKETI:
 \usepackage{hyperref}
 % paket za povezave znotraj dokumenta in hiper - povezave
+\usepackage{graphicx} 
+% za vstavljanje slik
+\usepackage{booktabs} 
+% za lepše tabele
+\usepackage{multirow} 
+% za vnose v tabeli čez več vrstic
+\usepackage{siunitx}  
+% za poravnavo na decimalni vejici v tabeli
+\usepackage{listings} 
+% za prikaz programske kode
+\usepackage{pgfplots} 
+% za risanje grafa funkcije
+\pgfplotsset{compat=1.18}
+
+
+%PAKETI ZA MATEMATIKO:
+\usepackage{amsmath}  
+% razna okolja za poravnane enačbe ipd.
+\usepackage{amsthm}   
+% definicije okolij za izreke, definicije, ..., ukaza theoremstyle, newtheorem
+\usepackage{amssymb} 
+% dodatni matematični simboli
+\usepackage{xypic}    
+% paket za diagrame
+
+\newcommand{\RR}{\mathbb{R}} % realna števila, \mathbb{..} je iz amssymb
+\newcommand{\NN}{\mathbb{N}} % naravna števila
+\newcommand{\pair}[1]{\langle #1 \rangle}
+\newcommand{\zap}[2]{#1_1, \ldots, #1_{#2}}
+
+{\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+}
+%uporaba: \begin{definicija} -> zapišeš definicijo oz karkoli že moaš zapisati
+{\theoremstyle{plain}
+\newtheorem{izrek}{Izrek}
+}
+% {\theoremstyle{proof}
+% \newtheorem{dokaz}{Dokaz}
+% }
+\newcommand{\pojem}[1]{\emph{\color{purple}#1}} %neki smo s tem delali v magišnem kvadratu
 
 
 % KONEC PREAMBULE
 
+
+% Definicija okolij izrek, posledica
+%{\theoremstyle{plain}
+%\newtheorem{izrek}{Izrek}[section]
+%\newtheorem{posledica}[izrek]{Posledica}
+%}
+
+% Definicija okoli za definicije in vaje
+%{\theoremstyle{definition}
+%\newtheorem{definicija}[izrek]{Definicija}
+%\newtheorem{vaja}[izrek]{Vaja}
+%}
+%to tukej ne bo delal zato ker sem že definirala definicijo nekje vmes
+
+
 % VSEBINA DOKUMENTA - se vedno začne z:
 \begin{document}
-% in kasneje konča z \end{document}
-
-% NASLOV IN AVTOR
+% in kasneje konča z \end{document}% NASLOV IN AVTOR
 
 \title{Zapiski za {\LaTeX}}
 % naslov
@@ -49,19 +103,521 @@
 \author{Lara Reš}
 % in avtor
 
+
 \date{}
 % lahko nastavimo še datum, ki ga zapišemo v zavite oklepaje, če pa želimo, da se datum ne izpiše, potem pustimo prazno znotraj oklepajev
+
 
 \maketitle 
 % je ukaz, s katerim dejansko naredimo naslov
 
 
 % OKOLJA
+
 \begin{abstract}
     To je okolje za povzetek, napišemo kratek opis vsebine članka
 \end{abstract}
 
+\begin{quote}
+Daljši navedek
+\end{quote}
+
+\begin{center}
+  centrirano besedilo
+\end{center}
+
+\begin{flushleft}
+  poravnano v levo
+\end{flushleft}
+
+\begin{flushright}
+  poravnano v desno
+\end{flushright}
+
+
+%MATEMATIČNI IZRAZI
+\begin{itemize}
+  \item $a^2 + b^2 = c^2$
+  \item \(a^2 + b^2 = c^2\)
+  \item \[
+    a^2 + b^2 = c^2.
+  \]
+  %matematični izraz na sredini vrstice
+  \item $$
+    a^2 + b^2 = c^2.
+  $$
+  \item \(a^2 + b^2 = c^2\) %matematični izraz v vrstici
+  \item okolje %\math za vrstični prikaz
+  \item okolje %\displaymath za prikazni način
+\end{itemize}
+
+Ulomke zapišemo tako: $\frac{22}{7}$
+$\displaystyle \frac{2}{3}$
+$2/3$
+
+\rule[12pt]{10pt}{10pt}
+%\rule[⟨višina⟩]{⟨dolžina⟩}{⟨širina⟩} - nariše pravokotnik
+
+pika za množenje: $\cdot$
+
+% Pravila za pisanje izrazov v prikaznem načinu:
+% 1. Ne delamo praznih vrstic pred in za izrazom, razen se s formulo konča stavek.
+% 2. Izraz mora biti del stavka, ne sme stati kar prepuščen sam sebi.
+% 3. Če se z izrazom konča stavek ali odvisni stavek, zapišemo tudi ločilo.
+Pravilno: za nenegativna števila $x_1, \ldots, x_n$ velja
+%
+\[
+  \frac{x_1 + \cdots + x_n}{n} \leq
+  \sqrt{\frac{x_1^2 + \cdots + x_n^2}{n}},
+\]
+%
+kjer enakost velja natanko tedaj, ko $x_1 = x_2 = \cdots = x_n$.
+
+Če želimo vstaviti v formulo besedilo, to naredimo s \verb|\text{...}|:
+%
+\begin{equation*}
+  \mathcal{P} = \{ n \in \mathbb{N} \mid \text{$n$ je praštevilo} \}.
+\end{equation*}
+%
+Omenimo še okolje \texttt{cases}, s katerim obravnavamo primere:
+%
+\[
+  f(x) =
+  \begin{cases}
+    -1 & \text{če $x < 1$,} \\
+     x & \text{če $-1 \leq x \leq 1$,} \\
+     1 & \text{če $1 < x$.}
+  \end{cases}
+\]
+
+%makroje smo definirali v preambuli
+Ali je res, da za vsak $n \in \NN$ in $a \in \RR$ obstaja natanko en $b \in \RR$, da je $b^n = a$?
+
+% Ukaz \par že obstaja, zato ne moremo definirati makroja \par
+
+Ali se urejeni pari pišejo $(x, y)$ ali $\pair{x, y}$? Kdo bi vedel. Je pa tako, da se
+splača uporabiti makro, ker lahko kasneje še spreminjamo njegovo definicijo.
+
+Ne počnimo neumnosti z makoroji: če seštejemo zaporedji $\zap{a}{n}$ in $\zap{b}{n}$,
+dobimo zaporedje $\zap{a + b}{n}$.
+
+% Pozor, indekse je treba pisati v {...}, sicer se zgodijo čudne stvari.
+% V definiciji \zap pobrišite {...} okoli #2 in poskusite:
+Kaj pa dobimo, če napišemo $\zap{x}{n + m}$?
+
+%Oklepaji
+
+Poznamo več vrst oklepajev: $($ in $)$, $[$ in $]$, $\{$ in $\}$, $\langle$ in $\rangle$.
+
+Še posebej opozorimo na $\langle$ in $\rangle$. Prav se piše $\langle x, y\rangle$ in ne
+$<x, y>$, ker {\LaTeX} obravnava simbola \texttt{<} in \texttt{>} kot relaciji `večje' in
+`manjše'.
+
+Včasih so oklepaji premahjni, denimo
+%
+\[
+  (\frac{a}{b})^n = \frac{a^n}{b^n}.
+\]
+%
+V takih primerih pred uklepaj napišemo \verb|\left| in pred zaklepaj \verb|\right|:
+%
+\[
+  \left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}.
+\]
+%
+Velikost oklepajev lahko nadzorujemo tudi ročno z ukazi \verb|\big|, \verb|\Big|,
+\verb|\bigg|, \verb|\Bigg|:
+%
+\[
+  \Bigg( \bigg( \Big( \big( ( ) \big) \Big) \bigg) \Bigg)
+\]
+
+Paket \texttt{amsmath} vsebuje okolja za prikaz raznih enačb. Če uporabimo okolje brez
+zvezdice, na primer \texttt{equation}, dobimo oštevilčeno enačbo, okolje z zvezdico, na
+primer \texttt{equation*}, pa nam da neoštevilčeno enačbo. Vedno oštevilčimo samo tiste
+enačbe, na katere se tudi sklicujemo.
+
+Običajne enačbe naredimo z okoljem \texttt{equation},
+\begin{equation*}
+  x^2 + y^2 = 1
+\end{equation*}
+%
+ali
+%
+\begin{equation}
+  \label{eq:1}
+  x^2 + y^2 = 1
+\end{equation}
+
+Z okoljem \texttt{gather} stavimo izraze enega pod drugega:
+%
+\begin{gather*}
+  \log 2 = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots, \\
+  \frac{2}{\frac{1}{x} + \frac{1}{y}} \leq \sqrt{x y} \leq \frac{x + y}{2}, \\
+  \sum_{k = 1}^\infty \frac{1}{k^2} = \frac{\pi^2}{6}.
+\end{gather*}
+
+Z okoljem \texttt{multtline} zapišemo daljšo izpeljavo čez več vrstic. Prva vrstica je
+poravnana levo, zadnja desno in vsem vmesne sredinsko:
+%
+\begin{multline*}
+  \sum_{i=1}^n x_i^2 \cdot \sum_{i=1}^n y_i^2
+  - \left( \sum_{i=1}^n x_i y_i \right)^2 = \\
+  \frac{1}{2} \cdot \sum_{i=1}^n x_i^2 \cdot \sum_{i=1}^n y_i^2
+  +
+  \frac{1}{2} \cdot \sum_{i=1}^n x_i^2 \cdot \sum_{i=1}^n y_i^2
+  -
+  \sum_{i=1}^n x_i y_i \cdot \sum_{j=1}^n x_j y_j = \\
+  \frac{1}{2} \cdot \sum_{i,j=1}^2 x_i^2 y_j^2
+  +
+  \frac{1}{2} \cdot \sum_{i,j=1}^n x_j^2 y_i^2
+  -
+  \sum_{i,j=1}^n x_i y_j x_j y_i = \\
+  \sum_{i,j=1}^n \frac{1}{2}\,
+  \left(
+    x_i^2 y_j^2 + x_j^2 x_i^2 - 2 x_i y_j x_j y_i
+  \right)
+  =
+  \sum_{i,j=1}^n \frac{1}{2}\,
+  \left(
+    x_i y_j - x_j y_i
+  \right)^2
+  \geq 0.
+\end{multline*}
+
+Z okoljem \texttt{align} lahko poravnamo vrstice na določen znaku. Mesto, kjer morajo biti
+vrstice poravnane, označimo z znakom \texttt{\&}, prehod v novo vrsto označimo z \verb|\\|:
+%
+\begin{align*}
+  (x + y)^2 - (x - y)^2
+  &= (x^2 + 2 x y + y^2) - (x^2 - 2 x y + y^2) \\
+  &= x^2 + 2 x y + y^2 - x^2 + 2 x y - y^2 \\
+  &= 2 x y + 2 x y \\
+  &= 4 x y.
+\end{align*}
+
+\begin{align*}
+  (x + y)^2 - (x - y)^2
+  &= (x^2 + 2 x y + y^2) - (x^2 - 2 x y + y^2) \\
+\intertext{in zato}
+  &= x^2 + 2 x y + y^2 - x^2 + 2 x y - y^2 \\
+  &= 2 x y + 2 x y \\
+  &= 4 x y.
+\end{align*}
+
+Z okoljem \texttt{align} lahko poravnamo več stolpcev, ki jih ločimo z znakom \texttt{\&}:
+%
+\begin{align*}
+  3 + 5 &= 8
+  &
+  2 + 2 &= 4
+  &
+  1 + 1 &= 2
+  \\
+  3 + 7 &= 10
+  &
+  4 + 1 &= 5
+  &
+  2 + 3 &= 5
+\end{align*}
+
+Matriko naredimo z okoljem \texttt{matrix}:\footnote{Tu imamo izjemo, ko je pisanje ločila
+  na koneč izraza nesmiselno.}
+%
+\begin{equation*}
+  \left[
+  \begin{matrix}
+    x_{1,1} & x_{1,2} & \cdots & x_{1,n} \\
+    x_{2,1} & x_{2,2} & \cdots & x_{2,n} \\
+    \vdots  & \vdots  & \ddots & \vdots  \\
+    x_{n,1} & x_{n,2} & \cdots & x_{n,n}
+  \end{matrix}
+  \right]
+\end{equation*}
+%
+Oklepaje postavimo okoli matrike z \verb|\left| in \verb|\right|, da so pravilne
+velikosti.
+
+\begin{izrek}
+  \label{izrek:max-zvezna}
+  Vsaka zvezna funkcija na zaprtem intervalu doseže maksimum.
+\end{izrek}
+
+\begin{proof}
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet arcu sit
+  amet augue consequat efficitur. Nam non diam congue, porttitor nisl nec, faucibus ex.
+  Fusce arcu ligula, molestie sit amet ligula sed, finibus sagittis felis. Nulla facilisi.
+  Suspendisse potenti
+  %
+  \[
+    f(x) = \int_0^x f'(t) \, d t,
+  \]
+  %
+  donec ultrices malesuada bibendum. Quisque ac rutrum orci. Aliquam
+  laoreet euismod nulla fermentum fringilla. Fusce bibendum dui enim, sed luctus diam
+  lacinia sit amet. Fusce suscipit sodales vulputate. Suspendisse euismod ante est, ut
+  fermentum mi consequat vitae. Sed vehicula, odio quis aliquam tincidunt, massa dolor
+  tristique ligula, tempus egestas libero sem ac leo.
+\end{proof}
+
+%\begin{posledica}
+%  Parbola ima maksimum na zaprtem intervalu.
+%\end{posledica}
+
+% Tu oprabimo \qedhere, da se znak kar v formlo.
+\begin{proof}
+  To sledi iz računa
+  %
+  \begin{align*}
+    (x + y)^2 - (x - y)^2
+    &= (x^2 + 2 x y + y^2) - (x^2 - 2 x y + y^2) \\
+    &= x^2 + 2 x y + y^2 - x^2 + 2 x y - y^2 \\
+    &= 2 x y + 2 x y \\
+    &= 4 x y. \qedhere
+  \end{align*}
+\end{proof}
+
+% V definiciji moramo vedno poudariti pojem, ki ga definiramo. To naredimo z \emph{...}.
+\begin{definicija}
+  \emph{Praštevilo} je tako naravno število $n$, večje od $1$, ki ni deljivo z nobenim
+  naravnih šetvilom.
+\end{definicija}
+
+%\begin{vaja}
+%  Na pamet izračunajte $23 \times 117$.
+%\end{vaja}
+
 
 % Članek lahko hierarhično razdelimo na razdelke (\section), podrazdelke (\subsection), podpodrazdelke (\subsubsection) in podpodpodrazdelke (\paragraph). V večini primerov potrebujemo samo razdelke in podarazdelke.
+
+\section{Uporaba razdelkov}
+
+\subsection{Uporaba podrazdelkov}
+
+\subsubsection{Uporaba podpodrazdelkov}
+
+
+%PISAVE
+
+\emph{napiše ležeče besedilo}
+
+\textbf{krepko}
+
+\emph{\textbf{oboje skupaj}}.
+
+Kaj se zgodi, če \emph{uporabimo poudarjeno \emph{znotraj} poudarjenega besedila}?
+Seveda \textbf{lahko lahko nastavimo tudi \textnormal{običajno} pisavo}.
+Besedilo lahko tudi \underline{podčrtamo}, vendar tega ne priporočamo, \underline{ker} \underline{je grdo}.
+Pišemo lahko tudi v \textsf{sans-serifni pisavi} ali pa \textsc{z malimi velikimi črkami},
+denimo \textsc{Python}. Ležeča pisava \textsl{ni ista reč kot} \emph{poudarjena pisava}.
+Včasih uporabimo tudi \texttt{pisavo fiksne širine}, v kateri so vsi znaki enako široki.
+
+% Ukazi s katerimi nastavimo velikost pisave, a tega raje ne počnite na roke
+\begin{center}
+{\Huge Zdravljica} \\
+{\Huge Živé naj vsi naródi,} \\
+{\huge ki hrepené dočakat dan,} \\
+{\LARGE ko, koder sonce hodi,} \\
+{\Large prepir iz svéta bo pregnan,} \\
+{\large ko rojak} \\
+{\normalsize prost bo vsak,} \\
+{\footnotesize ne vrag, le sosed bo mejak!} \\
+{\scriptsize Kdor ne skače ni Slovenc!} \\
+\end{center}
+
+
+%NAŠTEVANJE
+
+Neoštevilčeno naštevanje:
+%
+\begin{itemize}
+
+\item stvar
+
+\item šeena stvar
+\end{itemize}
+
+Oštevilčeno naštevanje:
+%
+\begin{enumerate}
+
+\item Prvi
+
+\item drugi
+
+\end{enumerate}
+
+Vgnezdeno naštevanje:
+%
+\begin{enumerate}
+\item bla
+\item blabla
+  \begin{itemize}
+  \item bla
+  \item blabla
+    \begin{itemize}
+    \item blabla
+    \item blablabla
+    \item blablablabla
+    \end{itemize}
+  \item bla
+    \begin{enumerate}
+    \item blabla
+    \item blablalbal
+    \item blabla
+    \end{enumerate}
+  \end{itemize}
+\end{enumerate}
+
+
+%PRESLEDKI
+~ pomeni kratek presledek - npr.: akad.~prof.~dr.~France namesto akad. prof. dr. France
+
+
+%VKLJUČEVANJE SLIKE
+\begin{center}
+%  \includegraphics{slika.jpg}
+\end{center}
+%center nam postavi sliko na sredino, slika je zakomentirana zato, da se v pdfju ne pokažeta dve
+
+
+%OBLIKOVANJE SLIK
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{slika.jpg}
+  \caption{Prvi zadetek na Google za ``very good''}
+\end{figure}
+
+
+%TABELE
+Primer magičnega kvadrata reda 3 je prikazan v tabeli \ref{table:mag3}.
+\begin{table}[!ht]
+   \centering % da je poravnanan na sredino
+   \large
+   \caption{Magični kvadrat reda 3} %napis nad tabelo
+   \label{table:mag3} %oznaka - je oznaka za sklicevanje
+\begin{tabular}{|c|l|r|} %kje se poravna vsak stolpec, toliko kot je teh različnih prostorčkov, toliko je stolpcev, da napišeš poševne črte je alt+w |
+   \hline
+   8 & 1 & 6 \\\hline %celice ločuješ z &
+   3 & 5 & 7 \\\hline
+   4 & 9 & 2 \\\hline
+\end{tabular}   
+\end{table}
+
+V tabeli~\ref{tab:volitve-vanilla} vidimo rezultate volitev, uporabili so navaden {\LaTeX}.
+V tabeli~\ref{tab:volitve-booktabs} vidimo rezultate volitev, uporabili smo paket \texttt{booktabs}.
+V tabeli~\ref{tab:volitve-align} vidimo rezultate volitev s poravnanimi decimalnimi pikami in vejicami.
+
+% h = here (tukaj)
+% t = top (na vrhu strani)
+% p = page (na svoji strani)
+\begin{table}[htp]
+  \centering
+  \begin{tabular}{|l|r|r|}
+  \hline
+  \textbf{Kandidat/Kandidatka}        & \textbf{Odstotek} & \textbf{Število glasov} \\ \hline
+  Borut Pahor                & 47,07\%  & 348.938 \\ \hline
+  Marjan Šarec               & 24,96\%  & 185.042 \\ \hline
+  Romana Tomc                & 13,74\%  & 101.845 \\ \hline
+  Ljudmila Novak             & 7,16\%   & 53.049 \\ \hline
+  Andrej Šiško               & 2,22\%   & 16.463 \\ \hline
+  Boris Popovič              & 1,79\%   & 13.277 \\ \hline
+  dr.\ Maja Makovec Brenčič  & 1,72\%   & 12.734 \\ \hline
+  Suzana Lara Krause         & 0,77\%   & 5.718 \\ \hline
+  Angela (Angelca) Likovič   & 0,58\%   & 4.273 \\ \hline
+  \end{tabular}
+  \caption{Rezultati predsedniških volitev, kot bi jih prikazali z grdo razpredelnico, ki ima preveč črt.}
+  \label{tab:volitve-vanilla}
+\end{table}
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{lrr}
+  \toprule
+  \textbf{Kandidat/Kandidatka}        & \textbf{Odstotek} & \textbf{Število glasov} \\ \midrule
+  Borut Pahor                & 47,07\%  & 348.938 \\
+  Marjan Šarec               & 24,96\%  & 185.042 \\
+  Romana Tomc                & 13,74\%  & 101.845 \\
+  Ljudmila Novak             & 7,16\%   & 53.049 \\
+  Andrej Šiško               & 2,22\%   & 16.463 \\
+  Boris Popovič              & 1,79\%   & 13.277 \\
+  dr.\ Maja Makovec Brenčič  & 1,72\%   & 12.734 \\
+  Suzana Lara Krause         & 0,77\%   & 5.718 \\
+  Angela (Angelca) Likovič   & 0,58\%   & 4.273 \\
+  \bottomrule
+  \end{tabular}
+  \caption{Rezultati predsedniških volitev s paketom \texttt{booktabs}}
+  \label{tab:volitve-booktabs}
+\end{table}
+
+% V tej tabeli smo števila zapisali 
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{lSS[group-minimum-digits=3]}
+  \toprule
+  \textbf{Kandidat/Kandidatka}        & \textbf{Odstotek} & \textbf{Število glasov} \\ \midrule
+  Borut Pahor                & 47.07\%  & 348938 \\
+  Marjan Šarec               & 24.96\%  & 185042 \\
+  Romana Tomc                & 13.74\%  & 101845 \\
+  Ljudmila Novak             & 7.16\%   & 53049 \\
+  Andrej Šiško               & 2.22\%   & 16463 \\
+  Boris Popovič              & 1.79\%   & 13277 \\
+  dr.\ Maja Makovec Brenčič  & 1.72\%   & 12734 \\
+  Suzana Lara Krause         & 0.77\%   & 5718 \\
+  Angela (Angelca) Likovič   & 0.58\%   & 4273 \\
+  \bottomrule
+  \end{tabular}
+  \caption{Rezultati predsedniških volitev, s poravnanimi decimalnimi vejicami in pikami}
+  \label{tab:volitve-align}
+\end{table}
+
+%če se npr druga celica v prvi vrstici razteza čez 5 stolpcev: \multicolumn{5}{|c|}{točna vrednost} in lahko izpuščaš &
+%vsako vrstico zaključiš z \\ in \hline
+
+%VKLJUČEVANJE SPLETNIH NASLOVOV
+\begin{itemize}
+   \item \url{http://mathworld.wolfram.com/MagicSquare.html}
+   \item \url{http://en.wikipedia.org/wiki/Magic_square}
+\end{itemize}
+
+
+%UKAZI
+
+\begin{center}
+  \verb|\imeUkaza{...}|
+\end{center}
+%
+ali
+%
+\begin{center}
+  \verb|\imeUkaza{...}{...}{...}|
+\end{center}
+%
+če ukaz sprejme več argumentov. Uporabnik lahko definira svoje ukaze, a o tem kasneje.
+Ukazi brez argumenta ``pojejo'' presledek, zato jih pišemo v zavite oklepaje:
+%
+\begin{itemize}
+\item \LaTeX je dokumentni sistem.
+\item {\LaTeX} je dokumentni sistem.
+\end{itemize}
+
+
+%GIT IGNORE
+% v datoteko .gitignore naštejemo vse dadoteke, ki jim v Gitu ne želimo slediti
+
+
+%VIRI
+Navedimo nekaj virov za {\LaTeX}. Ker smo uporabili paket \texttt{hyperref}, lahko na povezave kar kliknete:
+
+\begin{description}
+\item[\href{http://www-lp.fmf.uni-lj.si/plestenjak/vaje/latex/lshort.pdf}{\emph{Ne najkrajši uvod v {\LaTeX}}}]
+  Ravno pravšnji pregled {\LaTeX}a --- priporočamo!
+
+\item[\url{https://www.sharelatex.com/learn/Main_Page}]
+  Naučite se LaTeX v 30 minutah!
+
+\item[\url{http://detexify.kirelabs.org/classify.html}] Če iščete poseben znak, ga tu
+  narišete in spletna stran vam pove, kateri ukaz v {\LaTeX}u vam da tak znak.
+\end{description}
 
 \end{document}
