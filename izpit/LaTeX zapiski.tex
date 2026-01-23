@@ -33,6 +33,8 @@
 % OSTALI PAKETI:
 \usepackage{hyperref}
 % paket za povezave znotraj dokumenta in hiper - povezave
+\usepackage{makeidx}
+% za izdelavo stvarnega kazala
 \usepackage{graphicx} 
 % za vstavljanje slik
 \usepackage{booktabs} 
@@ -45,7 +47,7 @@
 % za prikaz programske kode
 \usepackage{pgfplots} 
 % za risanje grafa funkcije
-\pgfplotsset{compat=1.18}
+\pgfplotsset{compat=1.18} %to so mi nekje predlagal, da vklopim, ne vem, če je nujno potrebno
 
 
 %PAKETI ZA MATEMATIKO:
@@ -75,6 +77,8 @@
 % }
 \newcommand{\pojem}[1]{\emph{\color{purple}#1}} %neki smo s tem delali v magišnem kvadratu
 
+\makeindex
+%ukaz, ki naredi stvarno kazalo, a ga ne prikaže (mora biti v preambuli) (ta ukaz mi ni naredil stvarnega kazala???)
 
 % KONEC PREAMBULE
 
@@ -95,10 +99,10 @@
 
 % VSEBINA DOKUMENTA - se vedno začne z:
 \begin{document}
-% in kasneje konča z \end{document}% NASLOV IN AVTOR
+% in kasneje konča z \end{document}
 
 \title{Zapiski za {\LaTeX}}
-% naslov
+% naslov (včasih je lahko to tudi pred begin document)
 
 \author{Lara Reš}
 % in avtor
@@ -112,7 +116,12 @@
 % je ukaz, s katerim dejansko naredimo naslov
 
 
-% OKOLJA
+\section{STVARNO KAZALO}
+\tableofcontents
+
+\newpage
+
+\section{Okolja}
 
 \begin{abstract}
     To je okolje za povzetek, napišemo kratek opis vsebine članka
@@ -134,21 +143,24 @@ Daljši navedek
   poravnano v desno
 \end{flushright}
 
+\newpage
 
-%MATEMATIČNI IZRAZI
+\section{MATEMATIČNI IZRAZI}
+
+\subsection{različni načini}
 \begin{itemize}
   \item $a^2 + b^2 = c^2$
   \item \(a^2 + b^2 = c^2\)
   \item \[
     a^2 + b^2 = c^2.
   \]
-  %matematični izraz na sredini vrstice
+  matematični izraz na sredini vrstice
   \item $$
     a^2 + b^2 = c^2.
   $$
-  \item \(a^2 + b^2 = c^2\) %matematični izraz v vrstici
-  \item okolje %\math za vrstični prikaz
-  \item okolje %\displaymath za prikazni način
+  \item \(a^2 + b^2 = c^2\) matematični izraz v vrstici
+  \item okolje \ math za vrstični prikaz
+  \item okolje \ displaymath za prikazni način
 \end{itemize}
 
 Ulomke zapišemo tako: $\frac{22}{7}$
@@ -160,10 +172,10 @@ $2/3$
 
 pika za množenje: $\cdot$
 
-% Pravila za pisanje izrazov v prikaznem načinu:
-% 1. Ne delamo praznih vrstic pred in za izrazom, razen se s formulo konča stavek.
-% 2. Izraz mora biti del stavka, ne sme stati kar prepuščen sam sebi.
-% 3. Če se z izrazom konča stavek ali odvisni stavek, zapišemo tudi ločilo.
+\subsubsection{Pravila za pisanje izrazov v prikaznem načinu:}
+ 1. Ne delamo praznih vrstic pred in za izrazom, razen se s formulo konča stavek.
+ 2. Izraz mora biti del stavka, ne sme stati kar prepuščen sam sebi.
+ 3. Če se z izrazom konča stavek ali odvisni stavek, zapišemo tudi ločilo.
 Pravilno: za nenegativna števila $x_1, \ldots, x_n$ velja
 %
 \[
@@ -205,7 +217,7 @@ dobimo zaporedje $\zap{a + b}{n}$.
 % V definiciji \zap pobrišite {...} okoli #2 in poskusite:
 Kaj pa dobimo, če napišemo $\zap{x}{n + m}$?
 
-%Oklepaji
+\subsection{Oklepaji}
 
 Poznamo več vrst oklepajev: $($ in $)$, $[$ in $]$, $\{$ in $\}$, $\langle$ in $\rangle$.
 
@@ -387,8 +399,14 @@ velikosti.
 %  Na pamet izračunajte $23 \times 117$.
 %\end{vaja}
 
+\newpage
 
-% Članek lahko hierarhično razdelimo na razdelke (\section), podrazdelke (\subsection), podpodrazdelke (\subsubsection) in podpodpodrazdelke (\paragraph). V večini primerov potrebujemo samo razdelke in podarazdelke.
+\section{Razdelki in podrazdelki} 
+Članek lahko hierarhično razdelimo na razdelke %(\section), 
+podrazdelke, %(\subsection), 
+podpodrazdelke in %(\subsubsection)
+podpodpodrazdelke. %(\paragraph). 
+V večini primerov potrebujemo samo razdelke in podarazdelke.
 
 \section{Uporaba razdelkov}
 
@@ -396,8 +414,9 @@ velikosti.
 
 \subsubsection{Uporaba podpodrazdelkov}
 
+\newpage
 
-%PISAVE
+\section{PISAVE}
 
 \emph{napiše ležeče besedilo}
 
@@ -412,7 +431,7 @@ Pišemo lahko tudi v \textsf{sans-serifni pisavi} ali pa \textsc{z malimi veliki
 denimo \textsc{Python}. Ležeča pisava \textsl{ni ista reč kot} \emph{poudarjena pisava}.
 Včasih uporabimo tudi \texttt{pisavo fiksne širine}, v kateri so vsi znaki enako široki.
 
-% Ukazi s katerimi nastavimo velikost pisave, a tega raje ne počnite na roke
+\subsection{Ukazi s katerimi nastavimo velikost pisave, a tega raje ne počnite na roke}
 \begin{center}
 {\Huge Zdravljica} \\
 {\Huge Živé naj vsi naródi,} \\
@@ -425,10 +444,11 @@ Včasih uporabimo tudi \texttt{pisavo fiksne širine}, v kateri so vsi znaki ena
 {\scriptsize Kdor ne skače ni Slovenc!} \\
 \end{center}
 
+\newpage
 
-%NAŠTEVANJE
+\section{NAŠTEVANJE}
 
-Neoštevilčeno naštevanje:
+\subsection{Neoštevilčeno naštevanje:}
 %
 \begin{itemize}
 
@@ -437,7 +457,7 @@ Neoštevilčeno naštevanje:
 \item šeena stvar
 \end{itemize}
 
-Oštevilčeno naštevanje:
+\subsection{Oštevilčeno naštevanje:}
 %
 \begin{enumerate}
 
@@ -447,7 +467,7 @@ Oštevilčeno naštevanje:
 
 \end{enumerate}
 
-Vgnezdeno naštevanje:
+\subsection{Vgnezdeno naštevanje:}
 %
 \begin{enumerate}
 \item bla
@@ -469,28 +489,33 @@ Vgnezdeno naštevanje:
   \end{itemize}
 \end{enumerate}
 
+\newpage
 
-%PRESLEDKI
+\section{PRESLEDKI}
 ~ pomeni kratek presledek - npr.: akad.~prof.~dr.~France namesto akad. prof. dr. France
 
+\newpage
 
-%VKLJUČEVANJE SLIKE
+\section{SLIKE}
+\subsection{VKLJUČEVANJE SLIKE}
 \begin{center}
 %  \includegraphics{slika.jpg}
 \end{center}
 %center nam postavi sliko na sredino, slika je zakomentirana zato, da se v pdfju ne pokažeta dve
 
 
-%OBLIKOVANJE SLIK
-\begin{figure}
+\subsection{OBLIKOVANJE SLIK}
+\begin{figure}%[!ht]
   \centering
   \includegraphics[width=0.5\textwidth]{slika.jpg}
   \caption{Prvi zadetek na Google za ``very good''}
+  %\label{} dodaš ko se moreš kasnejesklicati na to sliko
 \end{figure}
 
+\newpage
 
-%TABELE
-Primer magičnega kvadrata reda 3 je prikazan v tabeli \ref{table:mag3}.
+\section{TABELE}
+%Primer magičnega kvadrata reda 3 je prikazan v tabeli \ref{table:mag3}.
 \begin{table}[!ht]
    \centering % da je poravnanan na sredino
    \large
@@ -504,9 +529,9 @@ Primer magičnega kvadrata reda 3 je prikazan v tabeli \ref{table:mag3}.
 \end{tabular}   
 \end{table}
 
-V tabeli~\ref{tab:volitve-vanilla} vidimo rezultate volitev, uporabili so navaden {\LaTeX}.
-V tabeli~\ref{tab:volitve-booktabs} vidimo rezultate volitev, uporabili smo paket \texttt{booktabs}.
-V tabeli~\ref{tab:volitve-align} vidimo rezultate volitev s poravnanimi decimalnimi pikami in vejicami.
+%V tabeli~\ref{tab:volitve-vanilla} vidimo rezultate volitev, uporabili so navaden {\LaTeX}.
+%V tabeli~\ref{tab:volitve-booktabs} vidimo rezultate volitev, uporabili smo paket \texttt{booktabs}.
+%V tabeli~\ref{tab:volitve-align} vidimo rezultate volitev s poravnanimi decimalnimi pikami in vejicami.
 
 % h = here (tukaj)
 % t = top (na vrhu strani)
@@ -574,14 +599,17 @@ V tabeli~\ref{tab:volitve-align} vidimo rezultate volitev s poravnanimi decimaln
 %če se npr druga celica v prvi vrstici razteza čez 5 stolpcev: \multicolumn{5}{|c|}{točna vrednost} in lahko izpuščaš &
 %vsako vrstico zaključiš z \\ in \hline
 
-%VKLJUČEVANJE SPLETNIH NASLOVOV
+\newpage
+
+\section{VKLJUČEVANJE SPLETNIH NASLOVOV}
 \begin{itemize}
    \item \url{http://mathworld.wolfram.com/MagicSquare.html}
    \item \url{http://en.wikipedia.org/wiki/Magic_square}
 \end{itemize}
 
+\newpage
 
-%UKAZI
+\section{UKAZI}
 
 \begin{center}
   \verb|\imeUkaza{...}|
@@ -605,8 +633,21 @@ Ukazi brez argumenta ``pojejo'' presledek, zato jih pišemo v zavite oklepaje:
 %GIT IGNORE
 % v datoteko .gitignore naštejemo vse dadoteke, ki jim v Gitu ne želimo slediti
 
+\newpage
 
-%VIRI
+\section{CITIRANJE}
+V {\LaTeX}u citiramo s pomočjo Bibtexa
+Bibliografijo damo v datoteko s končnico~\verb|.bib|. Uporabimo jo z ukazom
+\verb|\bibliography|, glej konec te datoteke. Z ukazom \verb|cite| citiramo posamezne
+enote~\cite{bauer06}, lahko več naenkrat~\cite{ersov80,lesnik10}. Če želimo citirati točno
+določen izrek v članku~\cite[Izrek~2.1]{lawvere69}, lahko naredimo tudi to.
+\index{prostor!topološki}% 
+Nujno mora biti to na koncu!!
+Pogosta napaka je, da uporabite samo ukaza bibliographystyle in bibliography, ne da bi uporabili ukaz cite. Ker LaTeX v seznamu literature izpiše samo literaturo, na katero se skličete v besedilu, se v takem primeru ne izpiše nič.
+
+\newpage
+
+\section{VIRI}
 Navedimo nekaj virov za {\LaTeX}. Ker smo uporabili paket \texttt{hyperref}, lahko na povezave kar kliknete:
 
 \begin{description}
@@ -620,4 +661,50 @@ Navedimo nekaj virov za {\LaTeX}. Ker smo uporabili paket \texttt{hyperref}, lah
   narišete in spletna stran vam pove, kateri ukaz v {\LaTeX}u vam da tak znak.
 \end{description}
 
+
+\bibliographystyle{plain}
+% nastavimo stil za bibliografije (plain, alpha, abbrv,...)
+
+\bibliography{literatura}
+%datoteka za Bibtex
+
+
+% Vsa navodila bodo privzela, da razumete razliko med okolji in ukazi, ter da veste, kateri ukazi spadajo v preambulo, kateri pa v vsebino dokumenta. Podobno navodila privzemajo, da veste, kaj so parametri okolij in ukazov (v {}) in kako izgledajo neobvezni pomožni parametri ([]).
+
+% V preambuli morate:
+
+% z \documentclass ustrezno določiti razred article ali beamer ter nastaviti velikost papirja in pisave (a4paper, 10pt, 14pt, …),
+% z \usepackage našteti ustrezne pakete,
+% s paketi babel, inputenc in fontenc nastaviti ustrezno kodiranje ter podporo za slovenščino,
+% vedeti, kdaj potrebujete pakete amsmath, amssymb, amsthm, hyperref, booktabs, graphicx, tikz, pgfplots ter naložiti samo tiste, ki jih potrebujete,
+% z \newcommand definirati nove ukaze,
+% z \newtheorem definirati nova okolja za definicije in trditve (vključno z ustrezno uporabo \theoremstyle).
+% V dokumentu morate znati vključiti:
+
+% naslov: \title, \author, \date, \maketitle,
+% dodatne datoteke: \input,
+% povzetek in kazalo: abstract, \tableofcontents,
+% razdelke: \section, \subsection, …
+% oblikovano besedilo: \emph, \textbf, \textit, \texttt, \verb, \url, \noindent, \centering, center, verbatim,
+% sezname (vključno z gnezdenimi): itemize, enumerate in \item,
+% tabele: table, tabular, \hline, \toprule, \midrule, \bottomrule, \multicolumn,
+% slike: figure, \includegraphics, tikzpicture (samo za že pripravljene slike),
+% sklice: label, ref, eqref, pageref,
+% citate: cite, nocite, bibliographystyle, bibliography.
+% Pri predstavitvah morate znati uporabiti:
+
+% temo z ukazom \usetheme (navodila bodo določila ime teme),
+% nove okvirje frame, \titlepage,
+% bloke: block, exampleblock in alertblock,
+% postopno odkrivanje: \pause, \onslide, \only ter določila <…> na ukazih, vključno z <+-> na seznamih,
+% stolpce columns z okolji column ali ukazi \column.
+% Pri matematiki morate ločiti med prikaznim (\[…\]) in vrstičnim načinom (\(…\) ali $…$) ter vedeti, kdaj uporabiti katerega. Brez dodatnih razlag morate poznati:
+
+% simbole: iz tabele matematičnih simbolov,
+% posebne prikaze: \frac, \sqrt, \binom, cases, matrike,
+% vgrajene funkcije: \sin, \cos, \log, \lim, … (predvsem, da ne napišete samo sin),
+% prikazna okolja: equation, align in multline (variante z * in brez),
+% pisave: \mathsf, \mathtt, mathrm, \mathbb, \mathcal,
+% vstavljanje besedila: \text.
+% Pazite, da boste uporabljali ustrezne simbole (npr. \emptyset in ne \phi za prazno množico ali pa \in in ne \epsilon za element).
 \end{document}
